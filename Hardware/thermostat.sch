@@ -61,23 +61,23 @@ $EndComp
 $Comp
 L LCD16X2 DS?
 U 1 1 55D36442
-P 8850 2150
-F 0 "DS?" H 8050 2550 40  0000 C CNN
-F 1 "LCD16X2" H 9550 2550 40  0000 C CNN
-F 2 "WC1602A" H 8850 2100 35  0000 C CIN
-F 3 "" H 8850 2150 60  0000 C CNN
-	1    8850 2150
+P 2200 1800
+F 0 "DS?" H 1400 2200 40  0000 C CNN
+F 1 "LCD16X2" H 2900 2200 40  0000 C CNN
+F 2 "WC1602A" H 2200 1750 35  0000 C CIN
+F 3 "" H 2200 1800 60  0000 C CNN
+	1    2200 1800
 	1    0    0    -1  
 $EndComp
 $Comp
 L ENCODER_5_PINS EN?
 U 1 1 55D365E3
-P 3750 1350
-F 0 "EN?" H 3900 1650 60  0000 C CNN
-F 1 "ENCODER_5_PINS" H 3750 1050 60  0000 C CNN
-F 2 "" H 3750 1350 60  0000 C CNN
-F 3 "" H 3750 1350 60  0000 C CNN
-	1    3750 1350
+P 8150 3250
+F 0 "EN?" H 8300 3550 60  0000 C CNN
+F 1 "ENCODER_5_PINS" H 8150 2950 60  0000 C CNN
+F 2 "" H 8150 3250 60  0000 C CNN
+F 3 "" H 8150 3250 60  0000 C CNN
+	1    8150 3250
 	1    0    0    -1  
 $EndComp
 $Comp
@@ -94,39 +94,39 @@ $EndComp
 $Comp
 L C C?
 U 1 1 55D43036
-P 8300 3350
-F 0 "C?" H 8325 3450 50  0000 L CNN
-F 1 "C" H 8325 3250 50  0000 L CNN
-F 2 "" H 8338 3200 30  0000 C CNN
-F 3 "" H 8300 3350 60  0000 C CNN
-	1    8300 3350
+P 1650 3000
+F 0 "C?" H 1675 3100 50  0000 L CNN
+F 1 "C" H 1675 2900 50  0000 L CNN
+F 2 "" H 1688 2850 30  0000 C CNN
+F 3 "" H 1650 3000 60  0000 C CNN
+	1    1650 3000
 	-1   0    0    1   
 $EndComp
-Text GLabel 8300 3650 3    60   Input ~ 0
+Text GLabel 1650 3300 3    60   Input ~ 0
 V0
 Text GLabel 7250 2250 2    60   Input ~ 0
 V0
-Text GLabel 8100 3000 3    60   Input ~ 0
+Text GLabel 1450 2650 3    60   Input ~ 0
 GND
-Text GLabel 8200 2750 3    60   Input ~ 0
+Text GLabel 1550 2400 3    60   Input ~ 0
 VCC
-Text GLabel 8400 2750 3    60   Input ~ 0
+Text GLabel 1750 2400 3    60   Input ~ 0
 RS
 Text GLabel 7050 2350 2    60   Input ~ 0
 RS
-Text GLabel 8500 3000 3    60   Input ~ 0
+Text GLabel 1850 2650 3    60   Input ~ 0
 GND
-Text GLabel 8600 2750 3    60   Input ~ 0
+Text GLabel 1950 2400 3    60   Input ~ 0
 GND
-Text GLabel 9100 2750 3    60   Input ~ 0
+Text GLabel 2450 2400 3    60   Input ~ 0
 D4
 Text GLabel 7250 2450 2    60   Input ~ 0
 D4
-Text GLabel 9200 3050 3    60   Input ~ 0
+Text GLabel 2550 2700 3    60   Input ~ 0
 D5
-Text GLabel 9300 2750 3    60   Input ~ 0
+Text GLabel 2650 2400 3    60   Input ~ 0
 D6
-Text GLabel 9400 3050 3    60   Input ~ 0
+Text GLabel 2750 2700 3    60   Input ~ 0
 D7
 Text GLabel 7050 2550 2    60   Input ~ 0
 D5
@@ -134,38 +134,38 @@ Text GLabel 7250 2750 2    60   Input ~ 0
 D6
 Text GLabel 7050 2850 2    60   Input ~ 0
 D7
-Text GLabel 9600 3050 3    60   Input ~ 0
+Text GLabel 2950 2700 3    60   Input ~ 0
 GND
-Text GLabel 9500 2750 3    60   Input ~ 0
+Text GLabel 2850 2400 3    60   Input ~ 0
 BKL
 Wire Wire Line
-	8300 2650 8300 3200
+	1650 2300 1650 2850
 Wire Wire Line
-	8300 3650 8300 3500
+	1650 3300 1650 3150
 Wire Wire Line
 	7250 2250 7000 2250
 Wire Wire Line
-	8100 2650 8100 3000
+	1450 2300 1450 2650
 Wire Wire Line
-	8200 2750 8200 2650
+	1550 2400 1550 2300
 Wire Wire Line
-	8400 2750 8400 2650
+	1750 2400 1750 2300
 Wire Wire Line
 	7050 2350 7000 2350
 Wire Wire Line
-	8500 3000 8500 2650
+	1850 2650 1850 2300
 Wire Wire Line
-	8600 2750 8600 2650
+	1950 2400 1950 2300
 Wire Wire Line
-	9100 2750 9100 2650
+	2450 2400 2450 2300
 Wire Wire Line
 	7250 2450 7000 2450
 Wire Wire Line
-	9200 2650 9200 3050
+	2550 2300 2550 2700
 Wire Wire Line
-	9300 2750 9300 2650
+	2650 2400 2650 2300
 Wire Wire Line
-	9400 2650 9400 3050
+	2750 2300 2750 2700
 Wire Wire Line
 	7050 2550 7000 2550
 Wire Wire Line
@@ -173,9 +173,9 @@ Wire Wire Line
 Wire Wire Line
 	7050 2850 7000 2850
 Wire Wire Line
-	9600 2650 9600 3050
+	2950 2300 2950 2700
 Wire Wire Line
-	9500 2750 9500 2650
+	2850 2400 2850 2300
 Text GLabel 4800 3450 0    60   Input ~ 0
 BKL
 Wire Wire Line
@@ -193,4 +193,54 @@ Text GLabel 7200 1950 2    60   Input ~ 0
 GND
 Wire Wire Line
 	7200 1950 7000 1950
+Wire Wire Line
+	7650 3150 7000 3150
+Wire Wire Line
+	7650 3350 7250 3350
+Wire Wire Line
+	7250 3350 7250 3250
+Wire Wire Line
+	7250 3250 7000 3250
+Text GLabel 7550 3250 0    60   Input ~ 0
+GND
+Wire Wire Line
+	7550 3250 7650 3250
+$Comp
+L R R?
+U 1 1 55D49535
+P 8950 2850
+F 0 "R?" V 9030 2850 50  0000 C CNN
+F 1 "10K" V 8950 2850 50  0000 C CNN
+F 2 "" V 8880 2850 30  0000 C CNN
+F 3 "" H 8950 2850 30  0000 C CNN
+	1    8950 2850
+	1    0    0    -1  
+$EndComp
+Text GLabel 8950 2550 1    60   Input ~ 0
+GND
+Text GLabel 7150 3050 2    60   Input ~ 0
+BTN
+Wire Wire Line
+	7150 3050 7000 3050
+Text GLabel 9200 3150 2    60   Input ~ 0
+BTN
+Wire Wire Line
+	9200 3150 8650 3150
+Wire Wire Line
+	8950 3150 8950 3000
+Connection ~ 8950 3150
+Wire Wire Line
+	8950 2700 8950 2550
+Text GLabel 4750 2400 0    60   Input ~ 0
+VCC
+Wire Wire Line
+	4750 2400 4950 2400
+Wire Wire Line
+	4950 2400 4950 2450
+Wire Wire Line
+	4950 2450 5100 2450
+Text GLabel 8850 3350 2    60   Input ~ 0
+VCC
+Wire Wire Line
+	8850 3350 8650 3350
 $EndSCHEMATC

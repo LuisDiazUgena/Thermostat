@@ -32,6 +32,7 @@ LIBS:arduino_shieldsNCL
 LIBS:Header1x01
 LIBS:encoder_5_pins
 LIBS:borniers
+LIBS:thermostat-cache
 EELAYER 25 0
 EELAYER END
 $Descr A4 11693 8268
@@ -179,4 +180,17 @@ Text GLabel 4800 3450 0    60   Input ~ 0
 BKL
 Wire Wire Line
 	4800 3450 5100 3450
+Text GLabel 4800 2550 0    60   Input ~ 0
+GND
+Wire Wire Line
+	5100 2550 4800 2550
+Wire Wire Line
+	5100 2650 4950 2650
+Wire Wire Line
+	4950 2650 4950 2550
+Connection ~ 4950 2550
+Text GLabel 7200 1950 2    60   Input ~ 0
+GND
+Wire Wire Line
+	7200 1950 7000 1950
 $EndSCHEMATC
