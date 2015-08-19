@@ -150,7 +150,8 @@ void loop() {
         //changeMode();
       } else {
         //Short click
-        isWorking = true;
+        isWorking =! isWorking;
+        
       }
       delay(250);//Debouncing
     } else {
@@ -178,12 +179,10 @@ void loop() {
 void checkTemp(){
   if(isWorking){
     if(t < (targetT - threeshold)){
-      Serial.println("Menor");
       digitalWrite(pinRelay,HIGH);
     }
     if(t > (targetT + threeshold)){
       digitalWrite(pinRelay, LOW);
-      Serial.println("MAYOR");
     }
   }
 }
