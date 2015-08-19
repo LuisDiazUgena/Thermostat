@@ -116,8 +116,12 @@ void loop() {
 
   lcd.setCursor(0, 0);
   lcd.print("T=");
-  lcd.setCursor(3, 0);
   lcd.print(t);
+  lcd.print("C");
+  lcd.setCursor(10,0);
+  lcd.print("H=");
+  lcd.print(h);
+  lcd.print("%HR");
 
   /*
     Bluetooth/Serial functions
@@ -151,11 +155,15 @@ void loop() {
       } else {
         //Short click
         isWorking =! isWorking;
-        
+        if (debug){
+          Serial.print("Is Working = ");
+          Serial.println(isWorking);
+        }
       }
       delay(250);//Debouncing
     } else {
       if(millis() < nextTime){
+        //Short click
         Serial.println("clicked");
         turnOnBKL();
       }
@@ -197,7 +205,6 @@ void turnOffBkl() {
     isBacklight = false;
   }
 }
-
 void updateEncoder() {
 
   int MSB = digitalRead(encoderPin1); //MSB = most significant bit

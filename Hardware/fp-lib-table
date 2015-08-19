@@ -1,0 +1,4 @@
+(fp_lib_table
+  (lib (name library)(type KiCad)(uri "$(KIPRJMOD)/Libraries/library.pretty")(options "")(descr ""))
+  (lib (name borniers)(type Legacy)(uri "$(KIPRJMOD)/Libraries/borniers.mod")(options "")(descr ""))
+)
