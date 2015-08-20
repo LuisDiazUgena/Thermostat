@@ -33,7 +33,10 @@ int encoderPin1 = 3;
 int encoderPin2 = 2;
 int encoderSwitchPin = 4; //push button switch
 
-int pinledLong = 13;
+int pinledLong = 13; //turn on when a long click has been detected
+int userDelay = 250; // change this to increase/decrease debounce time
+
+bool clickedOnce = false;
 
 int encoderMin = 0, encoderMax = 100; //Sets number of encoder steps.
 int sum;
@@ -107,6 +110,9 @@ void setup() {
 
   delay(1000);
   lcd.clear();
+
+  lcd.setCursor(0,1);
+  lcd.print("Click to set temp");
 }
 
 void loop() {
@@ -148,41 +154,66 @@ void loop() {
   digitalWrite(pinledLong, LOW);
 
   if (clicked) {
-    if (isBacklight) {
       if (millis() > nextTime) {
         //Long click
-        //changeMode();
+        if (isBacklight){
+          turnOffBkl();
+        }else{
+          turnOnBKL();
+        }
       } else {
         //Short click
-        isWorking =! isWorking;
-        if (debug){
-          Serial.print("Is Working = ");
-          Serial.println(isWorking);
+        if (!isWorking){
+          //Get temp && turn on
+          getUserTemp();
+        }else{
+          //turn OFF
+          isWorking = false;
+          clearLine(1);
+          lcd.setCursor(0,1);
+          lcd.print("Click to set temp");
         }
+
       }
-      delay(250);//Debouncing
-    } else {
-      if(millis() < nextTime){
-        //Short click
-        Serial.println("clicked");
-        turnOnBKL();
-      }
-    }
+    delay(userDelay);//Debouncing
     clicked = false;
   } else {
     //No click in this loop
-    if (lastencoderValue != encoderValue && isBacklight) {
+    if (lastencoderValue != encoderValue) {
       //but there is some... Rotation!
-      targetT = map(encoderValue,encoderMin,encoderMax,minT,maxT);
-      lcd.setCursor(0, 1);
-      lcd.print(targetT);
+
     }
   }
 
-  turnOffBkl();
   checkTemp();
 
   delay(100); //just here to slow down the output, and show it. will work even during a delay
+}
+void clearLine(int line){
+  //Delete a single line of lcd screen
+  int num = 20;
+  for(int i=0;i<num;i++){
+    lcd.setCursor(i,line);
+    lcd.print(" ");
+  }
+}
+void getUserTemp(){
+  delay(userDelay*2);
+  clearLine(1);
+  lcd.setCursor(0,1);
+  lcd.print("Set Temp:");
+  do{
+    targetT = map(encoderValue,encoderMin,encoderMax,minT,maxT);
+    lcd.setCursor(10,1);
+    lcd.print(targetT);
+  }while(!digitalRead(encoderSwitchPin));
+
+  isWorking = true;
+  clickedOnce = false;
+  clearLine(1);
+  lcd.setCursor(0,1);
+  lcd.print("Temp set is:");
+  lcd.print(targetT);
 }
 void checkTemp(){
   if(isWorking){
