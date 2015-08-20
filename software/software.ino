@@ -4,6 +4,7 @@ Thermostate software
 
 */
 
+
 #include <LiquidCrystal.h>
 //Temp && humidity libraries
 #include <HTS221.h>
@@ -21,9 +22,10 @@ SDA to A4
 //Temp && humidity variables
 float h = 0.0, t = 0.0;
 int targetT = 25,minT=16,maxT=30;
-int threeshold = 2;
+int threeshold = 1;
 bool isWorking = false;
-
+int updateTime=1; //Temperature and humidity update time in seconds
+unsigned long nextUpdate=0;
 //Relay variables
 int pinRelay=A2;
 
@@ -116,18 +118,23 @@ void setup() {
 }
 
 void loop() {
-  //Get temp/humidity
-  h = hts221.getHumidity();
-  t = hts221.getTemperature();
+  if (millis()>nextUpdate){
+    //Get temp/humidity
+    h = hts221.getHumidity();
+    t = hts221.getTemperature();
 
-  lcd.setCursor(0, 0);
-  lcd.print("T=");
-  lcd.print(t);
-  lcd.print("C");
-  lcd.setCursor(10,0);
-  lcd.print("H=");
-  lcd.print(h);
-  lcd.print("%HR");
+    //update values in LCD
+    lcd.setCursor(0, 0);
+    lcd.print("T=");
+    lcd.print(t);
+    lcd.print("C");
+    lcd.setCursor(10,0);
+    lcd.print("H=");
+    lcd.print(h);
+    lcd.print("%HR");
+
+    nextUpdate = millis() + updateTime + 1000;
+  }
 
   /*
     Bluetooth/Serial functions
@@ -181,7 +188,7 @@ void loop() {
     //No click in this loop
     if (lastencoderValue != encoderValue) {
       //but there is some... Rotation!
-
+  
     }
   }
 
@@ -198,7 +205,7 @@ void clearLine(int line){
   }
 }
 void getUserTemp(){
-  delay(userDelay*2);
+  delay(userDelay);
   clearLine(1);
   lcd.setCursor(0,1);
   lcd.print("Set Temp:");
@@ -223,6 +230,8 @@ void checkTemp(){
     if(t > (targetT + threeshold)){
       digitalWrite(pinRelay, LOW);
     }
+  }else{
+      digitalWrite(pinRelay, LOW);
   }
 }
 void turnOnBKL() {
