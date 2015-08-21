@@ -9,8 +9,9 @@ Thermostate software
 //Temp && humidity libraries
 #include <HTS221.h>
 #include <HTS221_Registers.h>
-
 #include "Wire.h"
+//EEPROM
+#include <EEPROM.h>
 
 HTS221 hts221;
 /*
@@ -118,14 +119,10 @@ void setup() {
   delay(1000);
   lcd.clear();
 
-  //get first measurement and asign it to min and max variables
   h = hts221.getHumidity();
   t = hts221.getTemperature();
 
-  hMax = h;
-  hMin = h;
-  tMin = t;
-  tMax = t;
+  initializeValues();
 
   changeMode();
 
@@ -199,9 +196,9 @@ void loop() {
   }
 
   checkTemp();
-
   delay(100); //just here to slow down the output, and show it. will work even during a delay
 }
+
 void manageActions(){
   switch(aktMenu){
     case 0:
@@ -303,15 +300,20 @@ void checkTemp(){
       digitalWrite(pinRelay, LOW);
   }
 
+  //Save max and min values into EEPROM to load those values at boot
   if(t>tMax){
     tMax = t;
+    EEPROM.write(0,tMax);
   }else{
     tMin = t;
+    EEPROM.write(1,tMin);
   }
   if(h>hMax){
     hMax = h;
+    EEPROM.write(2,hMax);
   }else{
     hMin = h;
+    EEPROM.write(3,hMin);
   }
 }
 void turnOnBKL() {
@@ -349,4 +351,28 @@ void updateEncoder() {
   }
 
   lastEncoded = encoded; //store this value for next time
+}
+void initializeValues(){
+  //get first measurement and asign it to min and max variables
+  //after checking if there is any info in EEPROM memory
+  (if EEPROM.read(0) != 0){
+    tMax = = EEPROM.read(address);
+  }else{
+    tMax = t;
+  }
+  (if EEPROM.read(1) != 0){
+    tMin = = EEPROM.read(address);
+  }else{
+    tMin = t;
+  }
+  (if EEPROM.read(2) != 0){
+    hMax = = EEPROM.read(address);
+  }else{
+    hMax = t;
+  }
+  (if EEPROM.read(3) != 0){
+    hMin = = EEPROM.read(address);
+  }else{
+    hMin = t;
+  }
 }
