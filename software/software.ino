@@ -71,7 +71,7 @@ int bklOffTime = 10000;
 unsigned long nextTimeBkl = 0;
 //Menu variables
 int aktMenu = 0,lastAktMenu; // 0 = temperature, 1 = stats
-int menus = 1; //max number of menus - 1
+int menus = 2; //max number of menus - 1
 
 void setup() {
 
@@ -218,7 +218,18 @@ void manageActions(){
     case 1:
       //stats temp
       showStats();
+      break;
+    case 2:
+      //Restart stats
+      clearStats();
+      break;
   }
+}
+void clearStats(){
+  for(int i=0;i<4;i++){
+    EEPROM.write(i,0);
+  }
+  initializeValues();
 }
 void showStats(){
   lcd.clear();
@@ -240,7 +251,12 @@ void showStats(){
   lcd.clear();
 }
 void changeMode(){
-  aktMenu = map(encoderValue,encoderMin,encoderMax,0,menus);
+
+  int menusMaxPulses = encoderMin + 10*menus;
+
+  aktMenu = map(encoderValue,0,menusMaxPulses,0,menus);
+  aktMenu = constrain(aktMenu,0,menus);
+  Serial.println(aktMenu);
   if(lastAktMenu != aktMenu){
     clearLine(1);
   }
@@ -257,6 +273,10 @@ void changeMode(){
     case 1:
       lcd.print("Click to show stats");
       break;
+    case 2:
+      lcd.print("Click to erase stats");
+      break;
+
   }
 
   lastAktMenu = aktMenu;
@@ -355,24 +375,41 @@ void updateEncoder() {
 void initializeValues(){
   //get first measurement and asign it to min and max variables
   //after checking if there is any info in EEPROM memory
-  (if EEPROM.read(0) != 0){
-    tMax = = EEPROM.read(address);
+  bool loaded = false;
+  if (EEPROM.read(0) != 0){
+    tMax = EEPROM.read(0);
+    loaded = true;
   }else{
     tMax = t;
   }
-  (if EEPROM.read(1) != 0){
-    tMin = = EEPROM.read(address);
+  if (EEPROM.read(1) != 0){
+    tMin = EEPROM.read(1);
+    loaded = true;
   }else{
     tMin = t;
   }
-  (if EEPROM.read(2) != 0){
-    hMax = = EEPROM.read(address);
+  if (EEPROM.read(2) != 0){
+    hMax = EEPROM.read(2);
+    loaded = true;
   }else{
     hMax = t;
   }
-  (if EEPROM.read(3) != 0){
-    hMin = = EEPROM.read(address);
+  if (EEPROM.read(3) != 0){
+    hMin = EEPROM.read(3);
+    loaded = true;
   }else{
     hMin = t;
   }
+
+  lcd.clear();
+  lcd.setCursor(0,0);
+  if(loaded){
+    lcd.print("Values loaded from");
+  }else{
+    lcd.print("Nothing to load in");
+  }
+  lcd.setCursor(0,1);
+  lcd.print("EEPROM");
+  delay(1000);
+  lcd.clear();
 }
