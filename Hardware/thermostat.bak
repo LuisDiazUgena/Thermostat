@@ -32,6 +32,7 @@ LIBS:arduino_shieldsNCL
 LIBS:Header1x01
 LIBS:encoder_5_pins
 LIBS:borniers
+LIBS:relay_module
 LIBS:thermostat-cache
 EELAYER 25 0
 EELAYER END
@@ -78,17 +79,6 @@ F 1 "ENCODER_5_PINS" H 8150 2950 60  0000 C CNN
 F 2 "library:ENCODER_5_PINS" H 8150 3250 60  0001 C CNN
 F 3 "" H 8150 3250 60  0000 C CNN
 	1    8150 3250
-	1    0    0    -1  
-$EndComp
-$Comp
-L CONN_3_V K1
-U 1 1 55D36620
-P 5050 1150
-F 0 "K1" H 4950 1400 50  0000 C CNN
-F 1 "CONN_3_V" H 5050 1340 40  0000 C CNN
-F 2 "borniers:bornier3_V" H 5050 1150 60  0001 C CNN
-F 3 "" H 5050 1150 60  0000 C CNN
-	1    5050 1150
 	1    0    0    -1  
 $EndComp
 $Comp
@@ -167,17 +157,13 @@ Wire Wire Line
 Wire Wire Line
 	7050 2550 7000 2550
 Wire Wire Line
-	7250 2750 7000 2750
-Wire Wire Line
 	7050 2850 7000 2850
 Wire Wire Line
 	2950 2300 2950 2700
 Wire Wire Line
 	2850 2400 2850 2300
-Text GLabel 4800 3450 0    60   Input ~ 0
-BKL
-Wire Wire Line
-	4800 3450 5100 3450
+Text GLabel 5000 3450 0    60   Input ~ 0
+SCL
 Text GLabel 4800 2550 0    60   Input ~ 0
 GND
 Wire Wire Line
@@ -235,42 +221,10 @@ Text GLabel 8850 3350 2    60   Input ~ 0
 VCC
 Wire Wire Line
 	8850 3350 8650 3350
-$Comp
-L R R1
-U 1 1 55D4AA7B
-P 2300 4600
-F 0 "R1" V 2380 4600 50  0000 C CNN
-F 1 "10K" V 2300 4600 50  0000 C CNN
-F 2 "Resistors_ThroughHole:Resistor_Horizontal_RM10mm" V 2230 4600 30  0001 C CNN
-F 3 "" H 2300 4600 30  0000 C CNN
-	1    2300 4600
-	1    0    0    -1  
-$EndComp
-Text GLabel 2300 4300 1    60   Input ~ 0
-GND
-Wire Wire Line
-	2300 4450 2300 4300
-$Comp
-L LED D1
-U 1 1 55D4AB4B
-P 2300 5100
-F 0 "D1" H 2300 5200 50  0000 C CNN
-F 1 "LED" H 2300 5000 50  0000 C CNN
-F 2 "LEDs:LED-3MM" H 2300 5100 60  0001 C CNN
-F 3 "" H 2300 5100 60  0000 C CNN
-	1    2300 5100
-	0    1    1    0   
-$EndComp
-Wire Wire Line
-	2300 4900 2300 4750
 Text GLabel 4800 3150 0    60   Input ~ 0
 RELAY
 Wire Wire Line
 	4800 3150 5100 3150
-Text GLabel 2300 5450 3    60   Input ~ 0
-RELAY
-Wire Wire Line
-	2300 5450 2300 5300
 Wire Wire Line
 	7000 3250 7150 3250
 Wire Wire Line
@@ -288,32 +242,179 @@ Wire Wire Line
 Text GLabel 7050 2850 2    60   Input ~ 0
 E
 $Comp
-L CONN_01X01 P?
+L CONN_01X01 P2
 U 1 1 55D4C211
-P 9000 1400
-F 0 "P?" H 9000 1500 50  0000 C CNN
-F 1 "CONN_01X01" V 9100 1400 50  0000 C CNN
-F 2 "" H 9000 1400 60  0000 C CNN
-F 3 "" H 9000 1400 60  0000 C CNN
-	1    9000 1400
+P 8550 5600
+F 0 "P2" H 8550 5700 50  0000 C CNN
+F 1 "CONN_01X01" V 8650 5600 50  0000 C CNN
+F 2 "library:header1x01" H 8550 5600 60  0001 C CNN
+F 3 "" H 8550 5600 60  0000 C CNN
+	1    8550 5600
+	1    0    0    -1  
+$EndComp
+$Comp
+L CONN_01X01 P1
+U 1 1 55D4C277
+P 7850 5600
+F 0 "P1" H 7850 5700 50  0000 C CNN
+F 1 "CONN_01X01" V 7950 5600 50  0000 C CNN
+F 2 "library:header1x01" H 7850 5600 60  0001 C CNN
+F 3 "" H 7850 5600 60  0000 C CNN
+	1    7850 5600
+	-1   0    0    1   
+$EndComp
+Wire Wire Line
+	8050 5600 8350 5600
+Text GLabel 8200 5550 1    60   Input ~ 0
+GND
+Wire Wire Line
+	8200 5550 8200 5600
+Connection ~ 8200 5600
+$Comp
+L relay_module R1
+U 1 1 55DC4273
+P 2650 4400
+F 0 "R1" H 2000 4800 60  0000 C CNN
+F 1 "relay_module" H 2400 4800 60  0000 C CNN
+F 2 "Pin_Headers:Pin_Header_Angled_1x03" H 2650 4400 60  0001 C CNN
+F 3 "" H 2650 4400 60  0000 C CNN
+	1    2650 4400
+	0    1    1    0   
+$EndComp
+Text GLabel 2650 4900 3    60   Input ~ 0
+RELAY
+Wire Wire Line
+	2650 4600 2650 4900
+Text GLabel 2850 4900 3    60   Input ~ 0
+GND
+Wire Wire Line
+	2850 4600 2850 4900
+Text GLabel 2750 4650 3    60   Input ~ 0
+VCC
+Wire Wire Line
+	2750 4650 2750 4600
+$Comp
+L CONN_01X04 P3
+U 1 1 55DC4D9E
+P 1650 4000
+F 0 "P3" H 1650 4250 50  0000 C CNN
+F 1 "CONN_01X04 (T&H)" V 1750 4000 50  0000 C CNN
+F 2 "Pin_Headers:Pin_Header_Straight_1x04" H 1650 4000 60  0001 C CNN
+F 3 "" H 1650 4000 60  0000 C CNN
+	1    1650 4000
+	0    -1   -1   0   
+$EndComp
+Text GLabel 1500 4500 3    60   Input ~ 0
+GND
+Wire Wire Line
+	1500 4500 1500 4200
+Text GLabel 1600 4250 3    60   Input ~ 0
+VCC
+Wire Wire Line
+	1600 4250 1600 4200
+Wire Wire Line
+	1700 4200 1700 4500
+Wire Wire Line
+	1800 4200 1800 4250
+Text GLabel 4800 2950 0    60   Input ~ 0
+BKL
+Wire Wire Line
+	4800 2950 5100 2950
+Text GLabel 4800 3350 0    60   Input ~ 0
+SDA
+Wire Wire Line
+	4800 3350 5100 3350
+Text GLabel 1700 4500 3    60   Input ~ 0
+SDA
+Text GLabel 1800 4250 3    60   Input ~ 0
+SCL
+Wire Wire Line
+	5000 3450 5100 3450
+$Comp
+L CONN_01X01 P7
+U 1 1 55DC4A64
+P 8550 5100
+F 0 "P7" H 8550 5200 50  0000 C CNN
+F 1 "CONN_01X01" V 8650 5100 50  0000 C CNN
+F 2 "library:header1x01" H 8550 5100 60  0001 C CNN
+F 3 "" H 8550 5100 60  0000 C CNN
+	1    8550 5100
+	1    0    0    -1  
+$EndComp
+$Comp
+L CONN_01X01 P6
+U 1 1 55DC4A6A
+P 7850 5100
+F 0 "P6" H 7850 5200 50  0000 C CNN
+F 1 "CONN_01X01" V 7950 5100 50  0000 C CNN
+F 2 "library:header1x01" H 7850 5100 60  0001 C CNN
+F 3 "" H 7850 5100 60  0000 C CNN
+	1    7850 5100
+	-1   0    0    1   
+$EndComp
+Wire Wire Line
+	8050 5100 8350 5100
+Text GLabel 8200 5050 1    60   Input ~ 0
+GND
+Wire Wire Line
+	8200 5050 8200 5100
+Connection ~ 8200 5100
+$Comp
+L CONN_01X01 P5
+U 1 1 55DC4C11
+P 7350 5600
+F 0 "P5" H 7350 5700 50  0000 C CNN
+F 1 "CONN_01X01" V 7450 5600 50  0000 C CNN
+F 2 "library:header1x01" H 7350 5600 60  0001 C CNN
+F 3 "" H 7350 5600 60  0000 C CNN
+	1    7350 5600
+	1    0    0    -1  
+$EndComp
+$Comp
+L CONN_01X01 P4
+U 1 1 55DC4C17
+P 6650 5600
+F 0 "P4" H 6650 5700 50  0000 C CNN
+F 1 "CONN_01X01" V 6750 5600 50  0000 C CNN
+F 2 "library:header1x01" H 6650 5600 60  0001 C CNN
+F 3 "" H 6650 5600 60  0000 C CNN
+	1    6650 5600
+	-1   0    0    1   
+$EndComp
+Wire Wire Line
+	6850 5600 7150 5600
+Text GLabel 7000 5550 1    60   Input ~ 0
+GND
+Wire Wire Line
+	7000 5550 7000 5600
+Connection ~ 7000 5600
+$Comp
+L CONN_01X01 P?
+U 1 1 55DC52CE
+P 7350 5050
+F 0 "P?" H 7350 5150 50  0000 C CNN
+F 1 "CONN_01X01" V 7450 5050 50  0000 C CNN
+F 2 "library:header1x01" H 7350 5050 60  0001 C CNN
+F 3 "" H 7350 5050 60  0000 C CNN
+	1    7350 5050
 	1    0    0    -1  
 $EndComp
 $Comp
 L CONN_01X01 P?
-U 1 1 55D4C277
-P 8300 1400
-F 0 "P?" H 8300 1500 50  0000 C CNN
-F 1 "CONN_01X01" V 8400 1400 50  0000 C CNN
-F 2 "" H 8300 1400 60  0000 C CNN
-F 3 "" H 8300 1400 60  0000 C CNN
-	1    8300 1400
+U 1 1 55DC52D4
+P 6650 5050
+F 0 "P?" H 6650 5150 50  0000 C CNN
+F 1 "CONN_01X01" V 6750 5050 50  0000 C CNN
+F 2 "library:header1x01" H 6650 5050 60  0001 C CNN
+F 3 "" H 6650 5050 60  0000 C CNN
+	1    6650 5050
 	-1   0    0    1   
 $EndComp
 Wire Wire Line
-	8500 1400 8800 1400
-Text GLabel 8650 1350 1    60   Input ~ 0
+	6850 5050 7150 5050
+Text GLabel 7000 5000 1    60   Input ~ 0
 GND
 Wire Wire Line
-	8650 1350 8650 1400
-Connection ~ 8650 1400
+	7000 5000 7000 5050
+Connection ~ 7000 5050
 $EndSCHEMATC

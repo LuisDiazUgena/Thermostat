@@ -1,4 +1,4 @@
-update=Tue 18 Aug 2015 17:19:03 CEST
+update=Tue 25 Aug 2015 12:08:14 CEST
 version=1
 last_client=kicad
 [pcbnew]
@@ -62,3 +62,4 @@ LibName30=Libraries/arduino_shieldsNCL
 LibName31=Libraries/Header1x01
 LibName32=Libraries/encoder_5_pins
 LibName33=Libraries/borniers
+LibName34=Libraries/relay_module
