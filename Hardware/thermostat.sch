@@ -436,7 +436,7 @@ F 3 "" H 1650 5100 60  0000 C CNN
 	1    1650 5100
 	0    -1   -1   0   
 $EndComp
-Text GLabel 1750 5400 3    60   Input ~ 0
+Text GLabel 1550 5400 3    60   Input ~ 0
 GND
 Wire Wire Line
 	1750 5400 1750 5300
@@ -444,7 +444,7 @@ Text GLabel 1650 5650 3    60   Input ~ 0
 VCC
 Wire Wire Line
 	1650 5650 1650 5300
-Text GLabel 1550 5400 3    60   Input ~ 0
+Text GLabel 1750 5400 3    60   Input ~ 0
 SGN
 Wire Wire Line
 	1550 5400 1550 5300

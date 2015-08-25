@@ -1,7 +1,7 @@
 (export (version D)
   (design
-    (source /home/luis-diaz/Escritorio/git/Thermostat/Hardware/test/thermostat.sch)
-    (date "Tue 25 Aug 2015 18:10:37 CEST")
+    (source /home/luis-diaz/Escritorio/git/Thermostat/Hardware/thermostat.sch)
+    (date "Tue 25 Aug 2015 18:27:45 CEST")
     (tool "Eeschema (2015-07-07 BZR 5906)-product")
     (sheet (number 1) (name /) (tstamps /)
       (title_block
@@ -124,30 +124,16 @@
       (sheetpath (names /) (tstamps /))
       (tstamp 55DCB05E)))
   (libparts
-    (libpart (lib conn) (part CONN_01X01)
-      (footprints
-        (fp Pin_Header_Straight_1X01)
-        (fp Pin_Header_Angled_1X01)
-        (fp Socket_Strip_Straight_1X01)
-        (fp Socket_Strip_Angled_1X01))
+    (libpart (lib encoder_5_pins) (part ENCODER_5_PINS)
       (fields
-        (field (name Reference) P)
-        (field (name Value) CONN_01X01))
+        (field (name Reference) EN)
+        (field (name Value) ENCODER_5_PINS))
       (pins
-        (pin (num 1) (name P1) (type passive))))
-    (libpart (lib conn) (part CONN_01X03)
-      (footprints
-        (fp Pin_Header_Straight_1X03)
-        (fp Pin_Header_Angled_1X03)
-        (fp Socket_Strip_Straight_1X03)
-        (fp Socket_Strip_Angled_1X03))
-      (fields
-        (field (name Reference) P)
-        (field (name Value) CONN_01X03))
-      (pins
-        (pin (num 1) (name P1) (type passive))
-        (pin (num 2) (name P2) (type passive))
-        (pin (num 3) (name P3) (type passive))))
+        (pin (num 1) (name A) (type BiDi))
+        (pin (num 2) (name C) (type BiDi))
+        (pin (num 3) (name B) (type BiDi))
+        (pin (num 4) (name ~) (type BiDi))
+        (pin (num 5) (name ~) (type BiDi))))
     (libpart (lib conn) (part CONN_01X04)
       (footprints
         (fp Pin_Header_Straight_1X04)
@@ -162,6 +148,19 @@
         (pin (num 2) (name P2) (type passive))
         (pin (num 3) (name P3) (type passive))
         (pin (num 4) (name P4) (type passive))))
+    (libpart (lib conn) (part CONN_01X03)
+      (footprints
+        (fp Pin_Header_Straight_1X03)
+        (fp Pin_Header_Angled_1X03)
+        (fp Socket_Strip_Straight_1X03)
+        (fp Socket_Strip_Angled_1X03))
+      (fields
+        (field (name Reference) P)
+        (field (name Value) CONN_01X03))
+      (pins
+        (pin (num 1) (name P1) (type passive))
+        (pin (num 2) (name P2) (type passive))
+        (pin (num 3) (name P3) (type passive))))
     (libpart (lib display) (part LCD16X2)
       (aliases
         (alias LCD-016N002L))
@@ -188,16 +187,50 @@
         (pin (num 14) (name D7) (type input))
         (pin (num 15) (name LED+) (type passive))
         (pin (num 16) (name LED-) (type passive))))
-    (libpart (lib encoder_5_pins) (part ENCODER_5_PINS)
+    (libpart (lib conn) (part CONN_01X01)
+      (footprints
+        (fp Pin_Header_Straight_1X01)
+        (fp Pin_Header_Angled_1X01)
+        (fp Socket_Strip_Straight_1X01)
+        (fp Socket_Strip_Angled_1X01))
       (fields
-        (field (name Reference) EN)
-        (field (name Value) ENCODER_5_PINS))
+        (field (name Reference) P)
+        (field (name Value) CONN_01X01))
       (pins
-        (pin (num 1) (name A) (type BiDi))
-        (pin (num 2) (name C) (type BiDi))
-        (pin (num 3) (name B) (type BiDi))
-        (pin (num 4) (name ~) (type BiDi))
-        (pin (num 5) (name ~) (type BiDi))))
+        (pin (num 1) (name P1) (type passive))))
+    (libpart (lib device) (part C)
+      (description "Unpolarized capacitor")
+      (footprints
+        (fp C?)
+        (fp C_????_*)
+        (fp C_????)
+        (fp SMD*_c)
+        (fp Capacitor*))
+      (fields
+        (field (name Reference) C)
+        (field (name Value) C))
+      (pins
+        (pin (num 1) (name ~) (type passive))
+        (pin (num 2) (name ~) (type passive))))
+    (libpart (lib device) (part R)
+      (description Resistor)
+      (footprints
+        (fp R_*)
+        (fp Resistor_*))
+      (fields
+        (field (name Reference) R)
+        (field (name Value) R))
+      (pins
+        (pin (num 1) (name ~) (type passive))
+        (pin (num 2) (name ~) (type passive))))
+    (libpart (lib relay_module) (part relay_module)
+      (fields
+        (field (name Reference) R)
+        (field (name Value) relay_module))
+      (pins
+        (pin (num 1) (name S) (type input))
+        (pin (num 2) (name +) (type input))
+        (pin (num 3) (name -) (type input))))
     (libpart (lib arduino_shieldsNCL) (part ARDUINO_SHIELD)
       (fields
         (field (name Reference) SHIELD)
@@ -230,53 +263,20 @@
         (pin (num GND2) (name GND2) (type power_in))
         (pin (num GND3) (name GND3) (type power_in))
         (pin (num RST) (name RST) (type input))
-        (pin (num V_IN) (name V_IN) (type power_in))))
-    (libpart (lib relay_module) (part relay_module)
-      (fields
-        (field (name Reference) R)
-        (field (name Value) relay_module))
-      (pins
-        (pin (num 1) (name S) (type input))
-        (pin (num 2) (name +) (type input))
-        (pin (num 3) (name -) (type input))))
-    (libpart (lib device) (part R)
-      (description Resistor)
-      (footprints
-        (fp R_*)
-        (fp Resistor_*))
-      (fields
-        (field (name Reference) R)
-        (field (name Value) R))
-      (pins
-        (pin (num 1) (name ~) (type passive))
-        (pin (num 2) (name ~) (type passive))))
-    (libpart (lib device) (part C)
-      (description "Unpolarized capacitor")
-      (footprints
-        (fp C?)
-        (fp C_????_*)
-        (fp C_????)
-        (fp SMD*_c)
-        (fp Capacitor*))
-      (fields
-        (field (name Reference) C)
-        (field (name Value) C))
-      (pins
-        (pin (num 1) (name ~) (type passive))
-        (pin (num 2) (name ~) (type passive)))))
+        (pin (num V_IN) (name V_IN) (type power_in)))))
   (libraries
     (library (logical relay_module)
-      (uri /home/luis-diaz/Escritorio/git/Thermostat/Hardware/test/Libraries/relay_module.lib))
+      (uri /home/luis-diaz/Escritorio/git/Thermostat/Hardware/Libraries/relay_module.lib))
     (library (logical display)
       (uri /usr/local/share/kicad/library/display.lib))
     (library (logical arduino_shieldsNCL)
-      (uri /home/luis-diaz/Escritorio/git/Thermostat/Hardware/test/Libraries/arduino_shieldsNCL.lib))
+      (uri /home/luis-diaz/Escritorio/git/Thermostat/Hardware/Libraries/arduino_shieldsNCL.lib))
     (library (logical encoder_5_pins)
-      (uri /home/luis-diaz/Escritorio/git/Thermostat/Hardware/test/Libraries/encoder_5_pins.lib))
-    (library (logical conn)
-      (uri /usr/local/share/kicad/library/conn.lib))
+      (uri /home/luis-diaz/Escritorio/git/Thermostat/Hardware/Libraries/encoder_5_pins.lib))
     (library (logical device)
-      (uri /usr/local/share/kicad/library/device.lib)))
+      (uri /usr/local/share/kicad/library/device.lib))
+    (library (logical conn)
+      (uri /usr/local/share/kicad/library/conn.lib)))
   (nets
     (net (code 1) (name GND)
       (node (ref P4) (pin 1))
@@ -285,7 +285,7 @@
       (node (ref P7) (pin 1))
       (node (ref P11) (pin 1))
       (node (ref P12) (pin 1))
-      (node (ref P10) (pin 3))
+      (node (ref P10) (pin 1))
       (node (ref P2) (pin 1))
       (node (ref EN1) (pin 2))
       (node (ref DS1) (pin 16))
@@ -307,9 +307,9 @@
       (node (ref DS1) (pin 2))
       (node (ref SHIELD1) (pin 5V))
       (node (ref P3) (pin 2))
-      (node (ref EN1) (pin 5))
       (node (ref P10) (pin 2))
-      (node (ref R1) (pin 2)))
+      (node (ref R1) (pin 2))
+      (node (ref EN1) (pin 5)))
     (net (code 4) (name SCL)
       (node (ref P3) (pin 4))
       (node (ref SHIELD1) (pin AD5)))
@@ -328,7 +328,7 @@
       (node (ref EN1) (pin 3)))
     (net (code 9) (name SGN)
       (node (ref SHIELD1) (pin AD3))
-      (node (ref P10) (pin 1)))
+      (node (ref P10) (pin 3)))
     (net (code 10) (name SDA)
       (node (ref P3) (pin 3))
       (node (ref SHIELD1) (pin AD4)))
